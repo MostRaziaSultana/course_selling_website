@@ -1,0 +1,53 @@
+{% extends 'authority_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4">
+    <h6 class="title-custom mb-4">{{ title }}</h6>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group mb-4">
+            <label for="id_title" class="form-label">
+                Title <span class="text-danger">*</span>
+            </label>
+            {{ form.title|add_class:"form-control" }}
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-12 col-md-6">
+                <label for="id_category" class="form-label">Category <span class="text-danger">*</span></label>
+                {{ form.category|add_class:"form-control" }}
+            </div>
+
+            <div class="col-12 col-md-6">
+                <label for="id_image" class="form-label">Image <span class="text-danger">*</span></label>
+                {{ form.image|add_class:"form-control" }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <label for="id_show_on_homepage" class="form-label">Feature on Homepage <span class="text-danger">*</span></label>
+                {{ form.show_on_homepage|add_class:"form-control" }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <label for="id_content" class="form-label">Content <span class="text-danger">*</span></label>
+            {{ form.content|add_class:"form-control" }}
+        </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,347 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} User Dashboard {% endblock %}
+{% block body %}
+<style>
+    .dashboard-menu {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .dashboard-menu ul {
+        list-style: none;
+        padding: 0;
+    }
+    .dashboard-menu .nav-link {
+        color: #333;
+        font-weight: 500;
+        padding: 12px 15px;
+        border-radius: 5px;
+        transition: 0.3s;
+        display: flex;
+        align-items: center;
+    }
+    .dashboard-menu .nav-link:hover, .dashboard-menu .nav-link.active {
+        background: #2eca7f;
+        color: white;
+    }
+    .dashboard-menu .nav-link i {
+        margin-right: 10px;
+    }
+    .card {
+        border: none;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .card-header {
+        background: #2eca7f;
+        color: white;
+        font-weight: bold;
+        border-radius: 8px 8px 0 0;
+    }
+    .btn-small {
+        padding: 5px 10px;
+        font-size: 14px;
+        background: #007bff;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+    .btn-small:hover {
+        background: #0056b3;
+    }
+    table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+    table th {
+        background: #007bff;
+        color: white;
+        padding: 10px;
+    }
+    table td {
+        padding: 10px;
+        background: #f8f9fa;
+        border-radius: 5px;
+    }
+</style>
+
+<section class="section-top">
+    <div class="container">
+        <div class="col-lg-10 offset-lg-1 text-center">
+            <div class="section-top-title">
+                <h1>User Dashboard</h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="dashboard section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="dashboard-menu">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#dashboard">
+                                <i class="fi-rs-settings-sliders"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#track-orders">
+                                <i class="fi-rs-shopping-bag"></i> My Courses
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#orders">
+                                <i class="fi-rs-shopping-cart-check"></i> Order History
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#address">
+                                <i class="fi-rs-marker"></i> My Address
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#account-detail">
+                                <i class="fi-rs-user"></i> Account Details
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">
+                                <i class="fi-rs-sign-out"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="dashboard">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Welcome, {{ user.username }}!</h5>
+                            </div>
+                            <div class="card-body">
+                                <p>You can check your <a href="#">recent orders</a>, manage <a href="#">addresses</a>, and <a href="#">edit account details</a>.</p>
+                            </div>
+
+                        </div>
+                        <div class="best-cpurse section-padding">
+        <div class="container">
+            <div class="section-title">
+              <h2>Current Course</h2>
+              
+            </div>
+            <div class="row">
+               
+                <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                    <div class="course-slide">
+                        <div class="course-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFpE_CJvPxG2BqjyCT73AxhEq5wEUOGVViIg&s" alt="course_image">
+<!--                            <div class="course-date">-->
+<!--                                <span class="month">${{ course.price|default:"Free" }}</span>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="course-content"><a class="c_btn" href=""> Web Development </a>
+                            <h3> <a href="">Python & Django</a></h3>
+                            <span><i class="fa fa-calendar"></i>3 Lessons</span>
+                            <span><i class="fa fa-clock-o"></i>3h 45m</span>
+                            <span><i class="fa fa-star"></i>4.9</span>
+                            <span><i class="fa fa-table"></i><strong>30 Seats Available</strong></span>
+
+                        </div>
+                    </div><!--END COURSE SLIDE -->
+                </div>
+                
+               
+            </div><!--END ROW -->
+        </div><!--END CONTAINER -->
+    </div>
+    <!--END COURSE -->
+                        <!--START COURSE -->
+    <div class="best-cpurse section-padding">
+        <div class="container">
+            <div class="section-title">
+              <h2>Your Completed Courses</h2>
+              
+            </div>
+            <div class="row">
+               
+                <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                    <div class="course-slide">
+                        <div class="course-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFpE_CJvPxG2BqjyCT73AxhEq5wEUOGVViIg&s" alt="course_image">
+<!--                            <div class="course-date">-->
+<!--                                <span class="month">${{ course.price|default:"Free" }}</span>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="course-content"><a class="c_btn" href=""> Web Development </a>
+                            <h3> <a href="">Python & Django</a></h3>
+                            <span><i class="fa fa-calendar"></i>3 Lessons</span>
+                            <span><i class="fa fa-clock-o"></i>3h 45m</span>
+                            <span><i class="fa fa-star"></i>4.9</span>
+                            <span><i class="fa fa-table"></i><strong>30 Seats Available</strong></span>
+
+                        </div>
+                    </div><!--END COURSE SLIDE -->
+                </div>
+                <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                    <div class="course-slide">
+                        <div class="course-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFpE_CJvPxG2BqjyCT73AxhEq5wEUOGVViIg&s" alt="course_image">
+<!--                            <div class="course-date">-->
+<!--                                <span class="month">${{ course.price|default:"Free" }}</span>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="course-content"><a class="c_btn" href=""> Web Development </a>
+                            <h3> <a href="">Python & Django</a></h3>
+                            <span><i class="fa fa-calendar"></i>3 Lessons</span>
+                            <span><i class="fa fa-clock-o"></i>3h 45m</span>
+                            <span><i class="fa fa-star"></i>4.9</span>
+                            <span><i class="fa fa-table"></i><strong>30 Seats Available</strong></span>
+
+                        </div>
+                    </div><!--END COURSE SLIDE -->
+                </div>
+               
+            </div><!--END ROW -->
+        </div><!--END CONTAINER -->
+    </div>
+    <!--END COURSE -->
+                    </div>
+
+                    <div class="tab-pane fade" id="track-orders">
+                        <div class="best-cpurse section-padding">
+        <div class="container">
+            <div class="section-title">
+              <h2>My Course</h2>
+              
+            </div>
+            <div class="row">
+               
+                <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                    <div class="course-slide">
+                        <div class="course-img">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFpE_CJvPxG2BqjyCT73AxhEq5wEUOGVViIg&s" alt="course_image">
+<!--                            <div class="course-date">-->
+<!--                                <span class="month">${{ course.price|default:"Free" }}</span>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="course-content"><a class="c_btn" href=""> Web Development </a>
+                            <h3> <a href="">Python & Django</a></h3>
+                            <span><i class="fa fa-calendar"></i>3 Lessons</span>
+                            <span><i class="fa fa-clock-o"></i>3h 45m</span>
+                            <span><i class="fa fa-star"></i>4.9</span>
+                            <span><i class="fa fa-table"></i><strong>30 Seats Available</strong></span>
+
+                        </div>
+                    </div><!--END COURSE SLIDE -->
+                </div>
+                
+               
+            </div><!--END ROW -->
+        </div><!--END CONTAINER -->
+    </div>
+    </div>
+    <!--END COURSE -->
+                    <div class="tab-pane fade" id="orders">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Your Orders</h5>
+                            </div>
+                            <div class="card-body">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Order ID</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th>Total</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                        <tr>
+                                            <td>#{{ order.id }}</td>
+                                            <td>{{ order.date|date:"M d, Y" }}</td>
+                                            <td>{{ order.status }}</td>
+                                            <td>${{ order.total }} for {{ order.item_count }} item(s)</td>
+                                            <td><a href="{% url 'order_detail' order.id %}" class="btn-small">View</a></td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr><td colspan="5">No orders found.</td></tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="address">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Billing Address</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>{{ user.profile.billing_address|default:"No billing address provided." }}</p>
+                                        <a href="" class="btn-small">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Shipping Address</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p>{{ user.profile.shipping_address|default:"No shipping address provided." }}</p>
+                                        <a href="" class="btn-small">Edit</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="account-detail">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Account Details</h5>
+                            </div>
+                            <div class="card-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control" name="first_name" value="{{ user.first_name }}">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" name="last_name" value="{{ user.last_name }}">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Email</label>
+                                            <input type="email" class="form-control" name="email" value="{{ user.email }}">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

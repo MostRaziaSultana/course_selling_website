@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Course_details {% endblock %}
+{% block body %}
+
+	<!-- START SECTION TOP -->
+	<section class="section-top">
+		<div class="container">
+			<div class="col-lg-10 offset-lg-1 text-center">
+				<div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+					<h1>Course Details</h1>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END SECTION TOP -->
+
+<!-- START EVENT -->
+<section class="our_event section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Course Details (Left Side) -->
+            <div class="col-lg-7 col-md-7 col-sm-12">
+                <div class="single_event_text_single">
+                    <h4>{{ course.title }}</h4>
+                    <span><i class="fa fa-table"></i><strong> Category:</strong> {{ course.category.name }}</span>
+                    <p>{{ course.description }}</p>
+                    <p><strong>Price:</strong> ${{ course.price }}</p>
+                    <div class="details-buttons-area">
+                        <a href="{% url 'checkout' course.id %}" class="custom-button theme-one">Buy</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Course Image (Right Side) -->
+            <div class="col-lg-5 col-md-5 col-sm-12 text-center">
+                <div class="single_event_single">
+                    <img alt="{{ course.title }}" class="img-fluid w-100" src="{{ course.image.url }}" />
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Details Tabs (Below) -->
+      <!-- Course Details Tabs -->
+<div class="row mt-5 mb-5">
+    <div class="col-12">
+        <div class="course-details-content section-bg p-4 rounded shadow-sm">
+            <ul class="nav nav-tabs justify-content-center mb-4" role="tablist">
+                <li class="nav-item">
+                    <a href="#overview" class="nav-link active" data-bs-toggle="tab">Overview</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#curriculum" class="nav-link" data-bs-toggle="tab">Curriculum</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#instructor" class="nav-link" data-bs-toggle="tab">Instructor</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#reviews" class="nav-link" data-bs-toggle="tab">Reviews</a>
+                </li>
+            </ul>
+            <div class="tab-content p-3">
+                <div class="tab-pane fade show active" id="overview">
+                    <p class="mb-0">{{ course.description }}</p>
+                </div>
+                <div class="tab-pane fade" id="curriculum">
+                    <p class="mb-0"><strong>Curriculum details will go here.</strong></p>
+                </div>
+                <div class="tab-pane fade" id="instructor">
+                    <p class="mb-0"><strong>Instructor information will go here.</strong></p>
+                </div>
+                <div class="tab-pane fade" id="reviews">
+                    <h6 class="review-title">Reviews</h6>
+                    <p class="mb-0"><strong>Reviews will be displayed here.</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+</section>
+<!-- END EVENT -->
+
+
+{% endblock %}

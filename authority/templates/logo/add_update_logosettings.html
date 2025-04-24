@@ -1,0 +1,85 @@
+{% extends 'authority_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4">
+   <h6 class="title-custom mb-4">{{ title }}</h6>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <label for="id_header_logo" class="form-label">Upload New Header Logo</label>
+                {{ form.header_logo|add_class:"form-control" }}
+            </div>
+            <div class="col-6 text-center d-flex flex-column align-items-center justify-content-center">
+                {% if form.instance.header_logo %}
+                    <label class="form-label fw-bold">Current Image</label>
+                    <img src="{{ form.instance.header_logo.url }}" alt="Header Logo" class="img-fluid mt-2" style="max-height: 70px;">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <label for="id_footer_logo" class="form-label">Upload New Footer Logo</label>
+                {{ form.footer_logo|add_class:"form-control" }}
+            </div>
+            <div class="col-6 text-center d-flex flex-column align-items-center justify-content-center">
+                {% if form.instance.footer_logo %}
+                    <label class="form-label fw-bold">Current Image</label>
+                    <img src="{{ form.instance.footer_logo.url }}" alt="Footer Logo" class="img-fluid mt-2" style="max-height: 70px;">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <label for="id_favicon" class="form-label">Upload New Favicon</label>
+                {{ form.favicon|add_class:"form-control" }}
+            </div>
+            <div class="col-6 text-center d-flex flex-column align-items-center justify-content-center">
+                {% if form.instance.favicon %}
+                    <label class="form-label fw-bold">Current Image</label>
+                    <img src="{{ form.instance.favicon.url }}" alt="Favicon" class="img-fluid mt-2" style="max-height: 50px;">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <label for="id_adminlogin_logo" class="form-label">Upload New Admin Login Logo</label>
+                {{ form.adminlogin_logo|add_class:"form-control" }}
+            </div>
+            <div class="col-6 text-center d-flex flex-column align-items-center justify-content-center">
+                {% if form.instance.adminlogin_logo %}
+                    <label class="form-label fw-bold">Current Image</label>
+                    <img src="{{ form.instance.adminlogin_logo.url }}" alt="Admin Login Logo" class="img-fluid mt-2" style="max-height: 70px;">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-6">
+                <label for="id_adminsidebar_logo" class="form-label">Upload New Admin Sidebar Logo</label>
+                {{ form.adminsidebar_logo|add_class:"form-control" }}
+            </div>
+            <div class="col-6 text-center d-flex flex-column align-items-center justify-content-center">
+                {% if form.instance.adminsidebar_logo %}
+                    <label class="form-label fw-bold">Current Image</label>
+                    <img src="{{ form.instance.adminsidebar_logo.url }}" alt="Admin Sidebar Logo" class="img-fluid mt-2" style="height: 70px;">
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary">{% if updated %}Update{% else %}Submit{% endif %}</button>
+        </div>
+    </form>
+</div>
+
+{% endblock body %}

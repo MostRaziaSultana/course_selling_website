@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +43,14 @@ INSTALLED_APPS = [
     'Home',
     'Payment',
     'Userdashboard',
+    'ContactUs',
+    'ckeditor',
+    'authority.apps.AuthorityConfig',
+    'Course',
+
+    # 3rd Party Packages
+    'widget_tweaks',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -67,6 +76,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'Home.context_processors.businessinfo',
+                'Home.context_processors.logo',
             ],
         },
     },
@@ -116,7 +127,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-
+LOGIN_URL = '/dashboard/login/'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 

@@ -59,7 +59,8 @@ def registration(request):
             )
 
             # Send verification email
-            send_verification_email(username, email, verification_token, request)
+            asyncio.run(
+                send_verification_email(username, email, verification_token, request))
 
             messages.success(request, 'A verification link has been sent to your email. Please check your inbox.')
             return redirect('login')
@@ -72,14 +73,14 @@ def registration(request):
 
 
 
-def send_verification_email(username, email, token, request):
+async def send_verification_email(username, email, token, request):
     subject = 'Verify Your Account'
     verification_url = request.build_absolute_uri(reverse('verify_email') + '?' + urlencode({'token': token}))
     message = f'Hi {username},\n\nPlease click on the link below to verify your email and activate your account:\n\n{verification_url}\n\nThank you!'
 
     email_from = settings.EMAIL_HOST_USER
     recipient_list = [email]
-    send_mail(subject, message, email_from, recipient_list)
+    await sync_to_async(send_mail)(subject, message, email_from, recipient_list)
 
 
 def verify_email(request):
@@ -148,10 +149,9 @@ def forgot_password(request):
 
                 profile, created = Profile.objects.get_or_create(user=user)
                 profile.password_reset_token = reset_token
-                profile.password_reset_expires = now() + timedelta(minutes=15)
                 profile.save()
 
-                send_forget_password_mail(user.email, reset_token, request)
+                asyncio.run(send_forget_password_mail(user.email, reset_token, request))
 
                 messages.success(request, 'A password reset link has been sent to your email.')
                 return redirect('forgot_password')
@@ -167,68 +167,64 @@ def forgot_password(request):
 
 
 
-def send_forget_password_mail(email, token, request):
+async def send_forget_password_mail(email, token, request):
     subject = 'Your Forget Password Link'
-    message = f' Hi, click on the link to reset your password {request.scheme}://{request.META["HTTP_HOST"]}/change_password/{token}'
+    reset_link = f"{request.scheme}://{request.META['HTTP_HOST']}/change_password/{token}/"
+    message = f'Hi, click on the link below to reset your password:\n\n{reset_link}\n\nThis link will expire in 15 minutes.'
     sender = settings.EMAIL_HOST_USER
     receiver = [email]
-    send_mail(subject, message, sender, receiver)
+    await sync_to_async(send_mail)(subject, message, sender, receiver)
 
 
 def verify(request, forget_password_token):
-    profile = Profile.objects.filter(reset_token=reset_token).first()
-    profile.is_verified = True
-    return redirect('login')
+    profile = Profile.objects.filter(password_reset_token=forget_password_token).first()
 
+    if profile:
+        profile.is_verified = True
+        profile.save()
+        messages.success(request, "Your email has been verified!")
+        return redirect('login')
+
+    messages.error(request, "Invalid email.")
+    return redirect('forgot_password')
 
 
 def change_password(request, token):
-    try:
-        # Find profile with the given reset token
-        prof_obj = Profile.objects.filter(password_reset_token=token).first()
-
-        if not prof_obj:
-            messages.warning(request, "Invalid or expired token!")
-            return redirect('forgot_password')
-
-        # Check if token is expired
-        if prof_obj.password_reset_expires and prof_obj.password_reset_expires < now():
-            messages.warning(request, "This password reset link has expired.")
-            return redirect('forgot_password')
-
-        if request.method == 'POST':
-            new_password = request.POST.get('new_password')
-            confirm_password = request.POST.get('confirm_password')
-
-            # Check for empty fields
-            if not new_password or not confirm_password:
-                messages.warning(request, "Please fill out all fields!")
-                return redirect(f'/change_password/{token}/')
-
-            # Check if passwords match
-            if new_password != confirm_password:
-                messages.warning(request, "Passwords do not match!")
-                return redirect(f'/change_password/{token}/')
-
-            # Update password
-            user = prof_obj.user
-            user.set_password(new_password)
-            user.save()
-
-            # Clear the reset token
-            prof_obj.password_reset_token = None
-            prof_obj.password_reset_expires = None
-            prof_obj.save()
-
-            messages.success(request, "Password changed successfully! You can now log in.")
-            return redirect('login')
-
-        return render(request, 'Accounts/pass_change.html', {'user_id': prof_obj.user.id})
-
-    except Exception as e:
-        print(f"Error: {e}")
-        messages.error(request, "An error occurred. Please try again.")
+    if not token:
+        messages.warning(request, "Invalid or expired token!")
         return redirect('forgot_password')
+
+    profile = Profile.objects.filter(password_reset_token=token).first()
+
+    if not profile:
+        messages.warning(request, "Invalid or expired token!")
+        return redirect('forgot_password')
+
+    if request.method == 'POST':
+        new_password = request.POST.get('new_password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if not new_password or not confirm_password:
+            messages.warning(request, "Please fill out all fields!")
+            return redirect('change_password', token=token)
+
+        if new_password != confirm_password:
+            messages.warning(request, "Passwords do not match!")
+            return redirect('change_password', token=token)
+
+        user = profile.user
+        user.set_password(new_password)
+        user.save()
+
+        profile.password_reset_token = None
+        profile.save()
+
+        messages.success(request, "Password changed successfully! You can now log in.")
+        return redirect('login')
+
+    return render(request, 'Auth/change_password.html', {'token': token})
+
+
 
 
 def logout(request):

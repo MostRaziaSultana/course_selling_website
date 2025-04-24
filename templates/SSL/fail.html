@@ -1,0 +1,85 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Failed</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+<!--                {% if logosettings.favicon %}-->
+<!--                    &lt;!&ndash; Favicon &ndash;&gt;-->
+<!--                    <link rel="shortcut icon" type="image/x-icon" href="{{ logosettings.favicon.url }}">-->
+<!--          {% else %}-->
+<!--                {% endif %}-->
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .error-container {
+            text-align: center;
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .error-icon {
+            font-size: 80px;
+            color: #dc3545;
+        }
+        .error-message {
+            margin: 20px 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: #343a40;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            color: white;
+        }
+        @media (max-width: 576px) {
+            .error-icon {
+                font-size: 60px;
+            }
+            .error-message {
+                font-size: 22px;
+            }
+            .btn-custom {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="error-container">
+    <div class="error-icon">
+        <i class="fas fa-exclamation-triangle"></i> <!-- FontAwesome Icon -->
+    </div>
+    <h1 class="error-message">Payment Failed!</h1>
+    <p>We’re sorry, but there was an issue with your payment. Please try again later or contact our support team for assistance.</p>
+    <div class="mt-4">
+        <a class="btn btn-custom btn-lg" href="{% url 'home' %}">Go to Home</a>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Blogs details {% endblock %}
+{% block body %}
+
+
+  <!-- START SECTION TOP -->
+	<section class="section-top">
+		<div class="container">
+			<div class="col-lg-10 offset-lg-1 text-center">
+				<div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+					<h1>Single Blog</h1>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li> / Single Blog</li>
+					</ul>
+				</div><!-- //.HERO-TEXT -->
+			</div><!--- END COL -->
+		</div><!--- END CONTAINER -->
+	</section>
+	<!-- END SECTION TOP -->
+
+	<style>
+    .placeholder-icon {
+        width: 200px;
+        height: 200px;
+        background-color: #e9ecef;
+        border-radius: 50%;
+        display: inline-block;
+    }
+    .text-start {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #555;
+        text-align: left;
+        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+</style>
+
+<div class="container text-center mt-5">
+    {% if blog_details.image %}
+        <img src="{{ blog_details.image.url }}" alt="{{ blog_details.title }}" class="img-fluid mb-3">
+    {% else %}
+        <div class="placeholder-icon mb-3"></div>
+    {% endif %}
+
+    <h2 class="mt-3">{{ blog_details.title }}</h2>
+
+    <div class="text-start mt-4">
+        <p>{{ blog_details.content|safe }}</p>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,317 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block body %}
+
+
+
+	<!-- START HOME -->
+	<section  id="home" class="home_bg" style="background-image: url('{% static 'assets/images/banner/home.png' %}');   background-size:cover; background-position: center center;">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-sm-6 col-xs-12">
+					<div class="home_content">
+						<h1>{{ banners.title }}</h1>
+						<p>{{ banners.description }}</p>
+					</div>
+					<div class="home_btn">
+						<a href="{% url 'all_courses' %}" class="cta"><span>Explore Courses</span>
+						  <svg width="13px" height="10px" viewBox="0 0 13 10">
+							<path d="M1,5 L11,5"></path>
+							<polyline points="8 1 12 5 8 9"></polyline>
+						  </svg>
+						</a>
+					</div>
+				</div><!-- END COL-->
+				<div class="col-lg-6 col-sm-6 col-xs-12">
+					<div class="home_me_img">
+						<img src="{{ banners.image.url }}" class="img-fluid" alt="home_image" />
+						<div class="home_ps">
+							<img src="{% static 'assets/images/icon/user2.svg' %}" alt="" />
+							<h2>7500+</h2>
+							<span>Active student</span>
+						</div>
+						<div class="home_ps2">
+							<img src="{% static 'assets/images/icon/file2.svg' %}" alt="" />
+							<h2>4500+</h2>
+							<span>Online Course</span>
+						</div>
+					</div>
+				</div><!-- END COL-->
+			</div><!--- END ROW -->
+		</div><!--- END CONTAINER -->
+	</section>
+	<!-- END  HOME -->
+
+	<!-- START TOP PROMO FEATURES -->
+	<section class="tp_feature">
+	   <div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-4 col-sm-4 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.2s" data-wow-offset="0">
+					<div class="single_tp">
+						<h3>Quality Education</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
+						<a href="#" class="cta"><span>Explore</span>
+						  <svg width="13px" height="10px" viewBox="0 0 13 10">
+							<path d="M1,5 L11,5"></path>
+							<polyline points="8 1 12 5 8 9"></polyline>
+						  </svg>
+						</a>
+					</div>
+				</div><!-- END COL -->
+				<div class="col-lg-4 col-sm-4 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+					<div class="single_tp">
+						<h3>Experienced Teachers</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
+						<a href="#" class="cta"><span>Explore</span>
+						  <svg width="13px" height="10px" viewBox="0 0 13 10">
+							<path d="M1,5 L11,5"></path>
+							<polyline points="8 1 12 5 8 9"></polyline>
+						  </svg>
+						</a>
+					</div>
+				</div><!-- END COL -->
+				<div class="col-lg-4 col-sm-4 col-xs-12 no-padding wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.4s" data-wow-offset="0">
+					<div class="single_tp">
+						<h3>Delicious Food</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur notted adipisicing elit sed do eiusmod tempor incididunt ut labore.</p>
+						<a href="#" class="cta"><span>Explore</span>
+						  <svg width="13px" height="10px" viewBox="0 0 13 10">
+							<path d="M1,5 L11,5"></path>
+							<polyline points="8 1 12 5 8 9"></polyline>
+						  </svg>
+						</a>
+					</div>
+				</div><!-- END COL -->
+			</div><!-- END ROW -->
+		</div><!-- END CONTAINER -->
+	</section>
+	<!-- END TOP PROMO FEATURES -->
+
+<!-- START COUNTER -->
+<section id="counts" class="counts section-padding">
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Some Fun Fact</h2>
+      <p>Our Great <span><u>Achievement</u></span></p>
+    </div>
+    <div class="row gy-4">
+      {% for counter in counters %}
+      <div class="col-lg-3 col-md-6">
+        <div class="count-box">
+          <i class="{{ counter.icon_class }}"></i>
+          <div>
+            <span data-purecounter-start="0" data-purecounter-end="{{ counter.value }}" data-purecounter-duration="1" class="purecounter"></span>
+            <p>{{ counter.name }}</p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- END COUNTER -->
+
+
+	<!-- START COMPANY PARTNER LOGO  -->
+	<div class="partner-logo section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="partner_title">
+                    <h3>Trusted Company Around The World!</h3>
+                </div>
+                <div class="partner-slider">
+                    <div class="partner-track">
+                        {% for brand in brands %}
+                            <div class="partner-item">
+                                <img src="{{ brand.logo.url }}" alt="{{ brand.name }}">
+                            </div>
+                        {% endfor %}
+                        <!-- Duplicate logos for smooth infinite effect -->
+                        {% for brand in brands %}
+                            <div class="partner-item">
+                                <img src="{{ brand.logo.url }}" alt="{{ brand.name }}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+.partner-slider {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 1));
+    padding: 20px 0;
+}
+
+.partner-track {
+    display: flex;
+    gap: 30px;
+    width: calc(200% + 30px);
+    animation: scrollLeft 15s linear infinite;
+    align-items: center;
+}
+
+.partner-item {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px; /* Add spacing without resizing */
+}
+
+.partner-item img {
+    max-height: 100px; /* Ensure it doesn’t get too big */
+    width: auto; /* Keep the original aspect ratio */
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.partner-item:hover img {
+    transform: scale(1.05);
+}
+
+/* Gradient Fade Effect on Edges */
+.partner-slider::before,
+.partner-slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 10%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.partner-slider::before {
+    left: 0;
+    background: linear-gradient(to left, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+}
+
+.partner-slider::after {
+    right: 0;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+}
+
+/* Animation */
+@keyframes scrollLeft {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+/* Pause Animation on Hover */
+.partner-slider:hover .partner-track {
+    animation-play-state: paused;
+}
+
+
+</style>
+
+
+	<!--START COURSE -->
+	<div class="best-cpurse section-padding">
+		<div class="container">
+			<div class="section-title">
+			  <h2>Popular Courses</h2>
+			  <p>Choose Our <span><u>Top Courses</u></span></p>
+			</div>
+			<div class="row">
+
+				{% for course in courses %}
+				<div class="col-lg-4 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+					<div class="course-slide">
+						<div class="course-img">
+							<img src="{{ course.image.url }}" alt="course_image">
+<!--							<div class="course-date">-->
+<!--								<span class="month">${{ course.price|default:"Free" }}</span>-->
+<!--							</div>-->
+						</div>
+						<div class="course-content"><a class="c_btn" href="{% url 'course_details' course.id %}">  {{ course.category.name|default:"Uncategorized" }}</a>
+							<h3> <a href="{% url 'course_details' course.id %}">{{ course.title }}</a></h3>
+							<span><i class="fa fa-calendar"></i>3 Lessons</span>
+							<span><i class="fa fa-clock-o"></i>3h 45m</span>
+							<span><i class="fa fa-star"></i>4.9</span>
+							<span><i class="fa fa-table"></i><strong>30 Seats Available</strong></span>
+
+						</div>
+					</div><!--END COURSE SLIDE -->
+				</div>
+				{% endfor %}
+				<div class="col-lg-12 text-center">
+					<div class="cc_btn">
+						<a class="btn_one" href="{% url 'all_courses' %}">View All Course</a>
+					</div>
+				</div><!--END COL -->
+			</div><!--END ROW -->
+		</div><!--END CONTAINER -->
+	</div>
+	<!--END COURSE -->
+
+<!--	&lt;!&ndash; START TOPIC&ndash;&gt;-->
+<!--				<section class="topic_content_area section-padding">-->
+<!--				   <div class="container">-->
+<!--						<div class="section-title">-->
+<!--							<h2>Start Learning </h2>-->
+<!--							<p>Popular <span><u>Topics To Learn</u></span> From Today.</p>-->
+<!--						</div>-->
+<!--						<div class="row">-->
+<!--				{% for category in categories %}-->
+<!--				<div class="col-lg-4 col-sm-6 col-xs-12">-->
+<!--					<div class="single_tca">-->
+<!--						<img src="{% static 'assets/images/icon/ct1.svg' %}" alt="category-icon" />-->
+<!--						<h2><a href="#">{{ category.name }}</a></h2>-->
+<!--						<span>{{ category.course_set.count }} Courses</span>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--				{% endfor %}-->
+<!--			</div>-->
+
+<!--		</div>&lt;!&ndash; END CONTAINER &ndash;&gt;-->
+<!--	</section>-->
+<!--	&lt;!&ndash; END TOPIC &ndash;&gt;-->
+
+
+	<!-- START BLOG -->
+	<section id="blog" class="blog_area section-padding">
+		<div class="container">
+			<div class="section-title">
+				<h2>News</h2>
+				<p>Our Latest <span><u>Blogs</u></span></p>
+			</div>
+			 <div class="row">
+            {% for blog in blogs %}
+            <div class="col-lg-4 col-sm-4 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                <div class="single_blog">
+                    <img src="{{ blog.image.url }}" class="img-fluid" alt="image" />
+                    <div class="content_box">
+                        <span>{{ blog.created_at|date:"d M Y" }} | <a href="{% url 'blog_details' blog.id %}">{{ blog.category }}</a></span>
+                        <h2><a href="{% url 'blog_details' blog.id %}">{{ blog.title|truncatewords:3 }}</a></h2>
+                        <a href="{% url 'blog_details' blog.id %}" class="cta"><span>READ MORE</span>
+                            <svg width="13px" height="10px" viewBox="0 0 13 10">
+                                <path d="M1,5 L11,5"></path>
+                                <polyline points="8 1 12 5 8 9"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div><!-- END COL-->
+            {% endfor %}
+        </div><!-- / END ROW -->
+		</div><!-- END CONTAINER  -->
+	</section>
+	<!-- END BLOG -->
+
+{% endblock %}

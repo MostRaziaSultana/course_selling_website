@@ -1,0 +1,133 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Purchase Success</title>
+
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .card {
+            background-color: #ffffffd6;
+            border-radius: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-yellow {
+            background-color: {{ colorsettings.background_color|default:'#ffd700' }};
+            color: black;
+            border: 1px solid yellow;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .btn-yellow:hover {
+            background-color: #ffcc00;
+        }
+
+        .section-top {
+            padding: 40px 0;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .section-top h1 {
+            color: #28a745;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section class="section-top">
+    <div class="container">
+        <h1>Purchase Confirmed!</h1>
+        <p class="lead text-dark">Thank you for buying the course.</p>
+    </div>
+</section>
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <!-- Course Info (Left Side) -->
+        <div class="col-lg-6 mb-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                   <div class="d-flex align-items-start mb-3">
+    {% if course.image %}
+        <img src="{{ course.image.url }}" alt="{{ course.title }}" class="rounded shadow-sm me-3" style="max-width: 100px; margin-right: 15px;">
+    {% endif %}
+    <div>
+        <h5 class="text-primary">{{ course.title }}</h5>
+    </div>
+</div>
+
+                    <hr>
+                    <p><strong>Category:</strong> {{ course.category.name }}</p>
+                    <p><strong>Original Price:</strong> {{ course.price }} BDT</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Summary (Right Side) -->
+        <div class="col-lg-6">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="text-success mb-3">💳 Payment Summary</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Order ID:
+                            <span>{{ order.id }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Amount Paid:
+                            <span>{{ order.amount_paid }} BDT</span>
+                        </li>
+                        {% if order.coupon_applied %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Coupon Applied:
+                            <span>{{ order.coupon_applied }}</span>
+                        </li>
+                        {% endif %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Transaction ID:
+                            <span>{{ order.tran_id }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Purchase Date:
+                            <span>{{ order.purchase_date }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Go Home Button -->
+    <div class="text-center mt-5">
+        <a class="btn btn-yellow shadow-sm" href="{% url 'home' %}">🏠 Go to Home</a>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

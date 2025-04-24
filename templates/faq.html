@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home {% endblock %}
+{% block body %}
+
+
+
+
+	<!-- START SECTION TOP -->
+	<section class="section-top">
+		<div class="container">
+			<div class="col-lg-10 offset-lg-1 text-center">
+				<div class="section-top-title wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.3s" data-wow-offset="0">
+					<h1>Faq</h1>
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li> / Faq</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- END SECTION TOP -->
+
+	<!-- START FAQ -->
+	<section class="faq_area section-padding">
+		<div class="container">
+			<div class="section-title-two">
+				<h2>Frequently Asked Questions</h2>
+			</div>
+			<div class="row justify-content-center">
+                <div class="col-lg-12 col-sm-12 col-xs-12">
+                    <div class="accordion" id="accordionExample">
+                        {% for faq in faqs %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading{{ forloop.counter }}">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse{{ forloop.counter }}"
+                                        aria-expanded="false"
+                                        aria-controls="collapse{{ forloop.counter }}">
+                                    {{ faq.question }}
+                                </button>
+                            </h2>
+                            <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse"
+                                 aria-labelledby="heading{{ forloop.counter }}"
+                                 data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    {{ faq.answer }}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+		</div>
+	</section>
+	<!-- END FAQ -->
+
+
+
+{% endblock %}

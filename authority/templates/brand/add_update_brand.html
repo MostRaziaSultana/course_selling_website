@@ -1,0 +1,38 @@
+{% extends 'authority_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4 shadow-sm">
+    <h6 class="title-custom mb-4">{{ title }}</h6>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <label for="id_name" class="form-label">Brand Name <span class="text-danger">*</span></label>
+                {{ form.name|add_class:"form-control" }}
+            </div>
+
+            <div class="col-md-6">
+                <label for="id_logo" class="form-label">Brand Logo <span class="text-danger">*</span></label>
+                {{ form.logo|add_class:"form-control" }}
+
+                {% if form.instance.logo %}
+                <div class="mt-2">
+                    <img src="{{ form.instance.logo.url }}" alt="Current Logo" class="img-thumbnail" style="max-width: 150px; height: auto;">
+                    <p class="text-muted mt-1">Current Logo</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock body %}

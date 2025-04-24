@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ businessinfo.site_name }}</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <link rel="icon" href="{{ logo.favicon.url }}" type="image/x-icon>
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'assetss/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assetss/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'assetss/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'assetss/css/style.css' %}" rel="stylesheet">
+
+    {% if messages %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        {% for message in messages %}
+            Swal.fire({
+                icon: "{{ message.tags|default:'info' }}",
+                title: "{{ message }}",
+                confirmButtonText: "OK",
+                confirmButtonColor: "#6C63FF",
+                timer: 3000,  // Auto-close after 3 seconds
+                showClass: { popup: '' },  // Remove show animation
+                hideClass: { popup: '' }   // Remove hide animation
+            });
+        {% endfor %}
+    });
+</script>
+{% endif %}
+
+    <!-- font-aswome cdn -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/ddee993d4e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="container-xxl position-relative bg-white d-flex p-0">
+        <!-- Spinner Start -->
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <!-- Spinner End -->
+
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pb-3">
+            <nav class="navbar bg-light navbar-light">
+            <a href="{% url 'authority:authority_admin' %}" class="navbar-brand mx-4 mb-3">
+
+
+                    <img src="{{ logo.header_logo.url }}" alt="Admin Login Logo" style="height:60px;width:200px;">
+            </a>
+
+<!--                <div class="d-flex align-items-center ms-4 mb-4">-->
+<!--                    <div class="position-relative">-->
+<!--                        {% comment %} <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> {% endcomment %}-->
+<!--                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>-->
+<!--                    </div>-->
+<!--                    <div class="ms-3">-->
+<!--                        {% if request.user.first_name %}-->
+<!--                            <h6 class="mb-0">{{request.user.first_name}} {{request.user.last_name}}</h6>-->
+<!--                        {% else %}-->
+<!--                            <h6 class="mb-0">{{request.user.username}}</h6>-->
+<!--                        {% endif %}-->
+
+<!--                        <span>Admin</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+                <div class="navbar-nav w-100">
+                    <a href="{% url 'authority:authority_admin' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+<!--                    <div class="nav-item dropdown">-->
+<!--                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-user-plus"></i>Manage User</a>-->
+<!--                        <div class="dropdown-menu bg-transparent border-0">-->
+<!--                            <a href="{% url 'authority:user_list' %}" class="dropdown-item"><i class="fa-solid fa-user me-2"></i>User List</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+
+                     <!-- User Link -->
+                    <a href="{% url 'authority:user_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
+                        <i class="fa-solid fa-user-plus" style="margin-right: 10px; font-size: 1.2em;"></i>
+                        <span>Administration</span>
+                    </a>
+                      <!-- Manage Carousel Items Link -->
+                    <a href="{% url 'authority:banner_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
+                        <i class="fa-solid fa-image" style="margin-right: 10px; font-size: 1.2em;"></i>
+                        <span>Manage Banner</span>
+                    </a>
+                    <!-- Manage Business Info Link -->
+                    <a href="{% url 'authority:business_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
+                        <i class="fa-solid fa-building" style="margin-right: 10px; font-size: 1.2em;"></i>
+                        <span>Business Info</span>
+                    </a>
+
+                   <!-- Manage Business Info Link -->
+                    <a href="{% url 'authority:logo_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
+                       <i class="fa-solid fa-image" style="margin-right: 10px; font-size: 1.2em;"></i>
+                        <span>Logo settings</span>
+                    </a>
+
+
+                <!-- FAQs Link -->
+                <a href="{% url 'authority:faq_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
+                    <i class="fa-solid fa-question-circle" style="margin-right: 10px;"></i>
+                    <span>FAQs</span>
+                </a>
+
+                    <!-- Manage Brand List Link -->
+                <a href="{% url 'authority:brand_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
+                    <i class="fa-solid fa-tags" style="margin-right: 10px; font-size: 1.2em;"></i>
+                    <span>Manage Brands</span>
+                </a>
+                     <!-- Manage Contact Messages Link -->
+                    <a href="{% url 'authority:contact_message_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
+                        <i class="fa-solid fa-envelope" style="margin-right: 10px; font-size: 1.2em;"></i>
+                        <span>Contact Messages</span>
+                    </a>
+
+<a href="#" class="nav-item nav-link" style="display: flex; align-items: center;" data-bs-toggle="collapse" data-bs-target="#manage-projects-collapse" aria-expanded="false" aria-controls="manage-projects-collapse">
+    <i class="fa-solid fa-briefcase" style="margin-right: 10px; font-size: 1.2em;"></i>
+    <span>Blogs</span>
+    <i class="fa-solid fa-chevron-right ms-auto"></i>
+</a>
+
+<div class="collapse" id="manage-projects-collapse">
+    <a href="{% url 'authority:blog_category_list' %}" class="nav-item nav-link" style="display: flex; align-items: center; margin-left: 20px;">
+        <i class="fa-solid fa-list-alt" style="margin-right: 10px; font-size: 1.2em;"></i>
+        <span>Blog Category</span>
+    </a>
+    <a href="{% url 'authority:blog_list' %}" class="nav-item nav-link" style="display: flex; align-items: center; margin-left: 20px;">
+        <i class="fa-solid fa-list" style="margin-right: 10px; font-size: 1.2em;"></i>
+        <span>Blog List</span>
+    </a>
+</div>
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-light navbar-light sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-hashtag"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+                <a href="http://{{ request.get_host }}/" class="sidebar-toggler1 " data-placement="bottom" target="_blank" title="Browse Frontend">
+                    <i class="fa fa-globe"></i>
+                </a>
+
+                <div class="navbar-nav align-items-center ms-auto">
+
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+                            {% comment %} <img class="rounded-circle me-lg-2" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> {% endcomment %}
+                            {% if request.user.first_name %}
+                                <span class="d-none d-lg-inline-flex"> {{request.user.first_name}} {{request.user.last_name}}</span>
+                            {% else %}
+                                <span class="d-none d-lg-inline-flex"> {{request.user.username}}</span>
+                            {% endif %}
+
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
+                            <a href="{% url 'authority:logout' %}" class="dropdown-item">Log Out</a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <!-- Navbar End -->
+
+
+            <!-- Blank Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row bg-light rounded  justify-content-center mx-0">
+                    {% block body %}
+                    {% endblock body %}
+                </div>
+            </div>
+            <!-- Blank End -->
+
+
+            {% comment %} <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-light rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">Your Site Name</a>, All Right Reserved.
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                            Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End --> {% endcomment %}
+
+    </div>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentPath = window.location.pathname;
+
+        // Get all the nav-link elements
+        const links = document.querySelectorAll('.navbar-nav .nav-link');
+
+        links.forEach(link => {
+            // Check if the link's href matches the current path
+            if (link.getAttribute('href') === currentPath) {
+                link.classList.add('active');  // Add the 'active' class
+            } else {
+                link.classList.remove('active');  // Remove the 'active' class from others
+            }
+        });
+    });
+</script>
+
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'assetss/lib/chart/chart.min.js' %}"></script>
+    <script src="{% static 'assetss/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'assetss/lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'assetss/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'assetss/lib/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static 'assetss/lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static 'assetss/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'assetss/js/main.js' %}"></script>
+<style>
+    /* Rotate the icon when the collapse is open (90 degrees for downward) */
+    .rotate-90 {
+        transform: rotate(90deg); /* Rotate 90 degrees for downward */
+        transition: transform 0.3s ease; /* Smooth transition */
+    }
+</style>
+
+<script>
+    // Rotate the arrow when the collapse is toggled
+    document.querySelectorAll('[data-bs-toggle="collapse"]').forEach(function (el) {
+        el.addEventListener('click', function () {
+            const icon = el.querySelector('.fa-chevron-right');
+            icon.classList.toggle('rotate-90');
+        });
+    });
+</script>
+
+</body>
+
+</html>
