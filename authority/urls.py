@@ -14,6 +14,7 @@ from authority.views import manage_brand
 from authority.views import manage_contact
 from authority.views import manage_coupon
 from authority.views import manage_sitesettings
+from authority.views import manage_course
 
 
 
@@ -108,4 +109,26 @@ urlpatterns += [
     path('site-settings/add/', manage_sitesettings.AddSiteSettingView.as_view(), name='add_site_setting'),
     path('site-settings/<int:pk>/update/', manage_sitesettings.UpdateSiteSettingView.as_view(), name='update_site_setting'),
     path('site-settings/<int:pk>/delete/', manage_sitesettings.SiteSettingDeleteView.as_view(), name='delete_site_setting'),
+]
+
+# Manage Course Categories
+urlpatterns += [
+    path('course-categories/', manage_course.CourseCategoryListView.as_view(), name='course_category_list'),
+    path('course-categories/add/', manage_course.AddCourseCategoryView.as_view(), name='add_course_category'),
+    path('course-categories/<int:pk>/update/', manage_course.UpdateCourseCategoryView.as_view(), name='update_course_category'),
+    path('course-categories/<int:pk>/delete/', manage_course.CourseCategoryDeleteView.as_view(), name='delete_course_category'),
+]
+
+# Manage Courses
+urlpatterns += [
+    path('courses/', manage_course.CourseListView.as_view(), name='course_list'),
+    path('courses/add/', manage_course.AddCourseView.as_view(), name='add_course'),
+    path('courses/<int:pk>/update/', manage_course.UpdateCourseView.as_view(), name='update_course'),
+    path('courses/<int:pk>/delete/', manage_course.CourseDeleteView.as_view(), name='delete_course'),
+]
+# Manage Course Purchases
+urlpatterns += [
+    path('course-purchases/', manage_course.CoursePurchaseListView.as_view(), name='course_purchase_list'),
+    path('course-purchases/<int:pk>/update/', manage_course.UpdateCoursePurchaseView.as_view(), name='update_course_purchase'),
+    path('course-purchases/<int:pk>/delete/', manage_course.CoursePurchaseDeleteView.as_view(), name='delete_course_purchase'),
 ]

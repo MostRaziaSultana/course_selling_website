@@ -1,0 +1,83 @@
+{% extends 'authority_base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4 shadow-sm">
+    <h6 class="title-custom mb-4">{{ title }}</h6>
+
+    <form method="post" enctype="multipart/form-data" novalidate>
+        {% csrf_token %}
+
+        <!-- Course Title -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="id_title" class="form-label">Course Title</label>
+                {{ form.title|add_class:"form-control" }}
+                {% if form.title.errors %}
+                    <div class="text-danger small">{{ form.title.errors.0 }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <!-- Category and Price in same row -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="id_category" class="form-label">Category</label>
+                {{ form.category|add_class:"form-control" }}
+                {% if form.category.errors %}
+                    <div class="text-danger small">{{ form.category.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6">
+                <label for="id_price" class="form-label">Price</label>
+                {{ form.price|add_class:"form-control" }}
+                {% if form.price.errors %}
+                    <div class="text-danger small">{{ form.price.errors.0 }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Course Image -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="id_image" class="form-label">Course Image</label>
+                {{ form.image|add_class:"form-control" }}
+                {% if form.image.errors %}
+                    <div class="text-danger small">{{ form.image.errors.0 }}</div>
+                {% endif %}
+            </div>
+
+                       <!-- Image Preview Section -->
+            <div class="col-md-6 d-flex align-items-center justify-content-center">
+                {% if form.instance.image %}
+                    <div class="form-group text-center">
+                        <label for="image_preview" class="form-label">Image Preview</label><br>
+                        <img src="{{ form.instance.image.url }}" alt="Course Image"
+                             style="width: 150px; height: 100px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd;" />
+                    </div>
+                {% endif %}
+            </div>
+
+                    <!-- Course Description -->
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="id_description" class="form-label">Course Description</label>
+                {{ form.description|add_class:"form-control" }}
+                {% if form.description.errors %}
+                    <div class="text-danger small">{{ form.description.errors.0 }}</div>
+                {% endif %}
+            </div>
+        </div>
+
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">
+            <button type="submit" class="btn btn-primary w-50">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

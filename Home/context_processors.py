@@ -1,5 +1,5 @@
 from .models import Logosettings,BusinessInfo
-
+from Course.models import CoursePurchase,Course
 
 def businessinfo(request):
 	return {

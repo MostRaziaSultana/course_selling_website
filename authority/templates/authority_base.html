@@ -74,35 +74,18 @@
                     <img src="{{ logo.header_logo.url }}" alt="Admin Login Logo" style="height:60px;width:200px;">
             </a>
 
-<!--                <div class="d-flex align-items-center ms-4 mb-4">-->
-<!--                    <div class="position-relative">-->
-<!--                        {% comment %} <img class="rounded-circle" src="img/user.jpg" alt="" style="width: 40px; height: 40px;"> {% endcomment %}-->
-<!--                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>-->
-<!--                    </div>-->
-<!--                    <div class="ms-3">-->
-<!--                        {% if request.user.first_name %}-->
-<!--                            <h6 class="mb-0">{{request.user.first_name}} {{request.user.last_name}}</h6>-->
-<!--                        {% else %}-->
-<!--                            <h6 class="mb-0">{{request.user.username}}</h6>-->
-<!--                        {% endif %}-->
-
-<!--                        <span>Admin</span>-->
-<!--                    </div>-->
-<!--                </div>-->
                 <div class="navbar-nav w-100">
                     <a href="{% url 'authority:authority_admin' %}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
-<!--                    <div class="nav-item dropdown">-->
-<!--                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa-solid fa-user-plus"></i>Manage User</a>-->
-<!--                        <div class="dropdown-menu bg-transparent border-0">-->
-<!--                            <a href="{% url 'authority:user_list' %}" class="dropdown-item"><i class="fa-solid fa-user me-2"></i>User List</a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-
 
                      <!-- User Link -->
                     <a href="{% url 'authority:user_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
                         <i class="fa-solid fa-user-plus" style="margin-right: 10px; font-size: 1.2em;"></i>
                         <span>Administration</span>
+                    </a>
+                    <!-- Manage Profile Link -->
+                    <a href="{% url 'authority:profile_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
+                        <i class="fa-solid fa-user-edit" style="margin-right: 10px; font-size: 1.2em;"></i>
+                        <span>Update Profile</span>
                     </a>
                       <!-- Manage Carousel Items Link -->
                     <a href="{% url 'authority:banner_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
@@ -146,6 +129,11 @@
                     <i class="fa-solid fa-sliders" style="margin-right: 10px;"></i>
                     <span>Site Settings</span>
                 </a>
+                <a href="{% url 'authority:course_purchase_list' %}" class="nav-item nav-link" style="display: flex; align-items: center;">
+                   <i class="fa-solid fa-cart-shopping" style="margin-right: 10px;"></i>
+                    <span>Purchases</span>
+                </a>
+
 
 <a href="#" class="nav-item nav-link" style="display: flex; align-items: center;" data-bs-toggle="collapse" data-bs-target="#manage-projects-collapse" aria-expanded="false" aria-controls="manage-projects-collapse">
     <i class="fa-solid fa-briefcase" style="margin-right: 10px; font-size: 1.2em;"></i>
@@ -163,6 +151,24 @@
         <span>Blog List</span>
     </a>
 </div>
+
+                    <a href="#" class="nav-item nav-link" style="display: flex; align-items: center;" data-bs-toggle="collapse" data-bs-target="#manage-courses-collapse" aria-expanded="false" aria-controls="manage-courses-collapse">
+    <i class="fa-solid fa-book-open" style="margin-right: 10px; font-size: 1.2em;"></i>
+    <span>Courses</span>
+    <i class="fa-solid fa-chevron-right ms-auto"></i>
+</a>
+
+<div class="collapse" id="manage-courses-collapse">
+    <a href="{% url 'authority:course_category_list' %}" class="nav-item nav-link" style="display: flex; align-items: center; margin-left: 20px;">
+        <i class="fa-solid fa-list-alt" style="margin-right: 10px; font-size: 1.2em;"></i>
+        <span>Course Category</span>
+    </a>
+    <a href="{% url 'authority:course_list' %}" class="nav-item nav-link" style="display: flex; align-items: center; margin-left: 20px;">
+        <i class="fa-solid fa-list" style="margin-right: 10px; font-size: 1.2em;"></i>
+        <span>Course List</span>
+    </a>
+</div>
+
 
                 </div>
             </nav>

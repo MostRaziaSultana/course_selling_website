@@ -9,7 +9,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from Home.models import Banner,Blog,BlogCategory,BusinessInfo,Logosettings,FAQ,Brand
 from ContactUs.models import UserMessage
-from Course.models import Coupon,SiteSettings
+from Course.models import Coupon,SiteSettings,CourseCategory,CoursePurchase,Course
 
 # forms
 class UserInfoForm(forms.ModelForm):
@@ -198,3 +198,19 @@ class SiteSettingsForm(forms.ModelForm):
     class Meta:
         model = SiteSettings
         fields = ('whatsapp_logo', 'facebook_pixel','ssl_id','ssl_password','is_sandbox')
+
+class CourseCategoryForm(forms.ModelForm):
+    class Meta:
+        model = CourseCategory
+        fields = ['name']
+
+
+class CourseForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ['title', 'description', 'category', 'image', 'price']
+
+class CoursePurchaseForm(forms.ModelForm):
+    class Meta:
+        model = CoursePurchase
+        fields = ['user', 'course', 'amount_paid', 'coupon_applied', 'is_ordered']
