@@ -9,6 +9,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from Home.models import Banner,Blog,BlogCategory,BusinessInfo,Logosettings,FAQ,Brand
 from ContactUs.models import UserMessage
+from Course.models import Coupon,SiteSettings
 
 # forms
 class UserInfoForm(forms.ModelForm):
@@ -184,3 +185,16 @@ class ContactMessageForm(forms.ModelForm):
     class Meta:
         model = UserMessage
         fields = ['name', 'email', 'subject', 'message']
+
+
+class CouponForm(forms.ModelForm):
+    start_date_time = forms.DateTimeField()
+    end_date_time = forms.DateTimeField()
+    class Meta:
+        model = Coupon
+        fields = ('title', 'discount', 'minimum_amount', 'is_expired','start_date_time','end_date_time')
+
+class SiteSettingsForm(forms.ModelForm):
+    class Meta:
+        model = SiteSettings
+        fields = ('whatsapp_logo', 'facebook_pixel','ssl_id','ssl_password','is_sandbox')

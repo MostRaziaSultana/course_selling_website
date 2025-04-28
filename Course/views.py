@@ -9,7 +9,6 @@ from decimal import Decimal
 import uuid
 from django.views.decorators.csrf import csrf_exempt
 
-# from sslcommerz_lib import SSLCOMMERZ
 from sslcommerz_lib import SSLCOMMERZ
 import requests
 
@@ -81,6 +80,7 @@ def checkout(request, id):
 
             except Coupon.DoesNotExist:
                 messages.error(request, "Invalid or expired coupon.")
+                return redirect(request.META.get('HTTP_REFERER', 'checkout'))
 
         # Handle payment submission
         elif 'payment_submit' in request.POST:

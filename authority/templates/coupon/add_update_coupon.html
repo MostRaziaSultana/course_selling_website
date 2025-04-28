@@ -1,0 +1,63 @@
+{% extends 'authority_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4">
+    <h6 class="mb-4">{% if updated %}Update Coupon{% else %}Add Coupon{% endif %}</h6>
+
+    <form method='POST' enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="row mb-4">
+            <div class="col">
+                <label for="id_title" class="form-label">Coupon Title</label>
+                {{ form.title|add_class:"form-control" }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <label for="id_discount" class="form-label">Discount (Tk)</label>
+                {{ form.discount|add_class:"form-control" }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <label for="id_minimum_amount" class="form-label">Minimum Amount (Tk)</label>
+                {{ form.minimum_amount|add_class:"form-control" }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <label for="id_start_date" class="form-label">Start Date and Time</label>
+                {{ form.start_date_time|add_class:"form-control"|attr:"type:datetime-local" }}
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <label for="id_end_date" class="form-label">End Date and Time</label>
+                {{ form.end_date_time|add_class:"form-control"|attr:"type:datetime-local" }}
+            </div>
+        </div>
+
+<!--        <div class="row mb-4">-->
+<!--            <div class="col">-->
+<!--                <div class="form-check">-->
+<!--                    {{ form.is_expired|add_class:"form-check-input" }}-->
+<!--                    <label for="id_is_expired" class="form-check-label">Mark as Expired</label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <div class="d-grid gap-2 col-6 mx-auto">
+            <button type="submit" class="btn btn-primary">{% if updated %}Update{% else %}Submit{% endif %}</button>
+        </div>
+    </form>
+</div>
+{% endblock body %}

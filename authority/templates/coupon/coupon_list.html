@@ -1,0 +1,93 @@
+{% extends 'authority_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}Coupon List{% endblock title %}
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4 shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h6 class="title-custom">Coupon Management</h6>
+        <a href="{% url 'authority:add_coupon' %}" class="order-now-btn">
+            <i class="fa-solid fa-circle-plus me-2"></i>Add Coupon
+        </a>
+    </div>
+
+    {% if coupon_list %}
+    <div class="table-responsive">
+        <table class="table text-start align-middle table-bordered table-hover mb-0 table-custom">
+            <thead class="table-white">
+                <tr class="text-grey">
+                    <th class="text-center">Sl</th>
+                    <th>Title</th>
+                    <th>Discount (Tk)</th>
+                    <th>Total Users</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th class="text-center">Is Expired</th>
+                    <th class="text-center">Update</th>
+                    <th class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for coupon in coupon_list %}
+                <tr>
+                    <td class="text-center">{{ forloop.counter0|add:page_obj.start_index }}</td>
+                    <td>{{ coupon.title }}</td>
+                    <td>{{ coupon.discount }}</td>
+                    <td>{{ coupon.used_by.count }}</td>
+                    <td>{{ coupon.start_date_time|date:"Y-m-d H:i" }}</td>
+                    <td>{{ coupon.end_date_time|date:"Y-m-d H:i" }}</td>
+                    <td class="text-center">
+                        {% if coupon.is_expired %}
+                            <i class="fas fa-check-circle text-success" title="Expired"></i>
+                        {% else %}
+                            <i class="fas fa-times-circle text-danger" title="Not Expired"></i>
+                        {% endif %}
+                    </td>
+                    <td class="text-center">
+                        <a class="order-now-btn" href="{% url 'authority:update_coupon' coupon.id %}">Update</a>
+                    </td>
+                    <td class="text-center">
+                        <form action="{% url 'authority:delete_coupon' coupon.id %}" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this coupon?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="text-center text-muted">No coupons found.</div>
+    {% endif %}
+
+    <div class="pagination mt-4 d-flex justify-content-end">
+        <ul class="pagination mb-0">
+            {% if page_obj.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">&laquo; Previous</span>
+            </li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <span class="page-link">Next &raquo;</span>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+
+
+{% endblock body %}

@@ -12,6 +12,8 @@ from authority.views import manage_logo
 from authority.views import manage_faq
 from authority.views import manage_brand
 from authority.views import manage_contact
+from authority.views import manage_coupon
+from authority.views import manage_sitesettings
 
 
 
@@ -93,4 +95,17 @@ urlpatterns += [
     path('contact-message/detail/<int:pk>/', manage_contact.ContactMessageDetailView.as_view(), name='contact_message_detail'),
     path('contact-message/delete/<int:pk>/', manage_contact.ContactMessageDeleteView.as_view(), name='delete_contact_message'),
 ]
-
+# Manage Coupon
+urlpatterns += [
+    path('coupon_list/', manage_coupon.CouponListView.as_view(), name='coupon_list'),
+    path('update_coupon/<int:pk>/',  manage_coupon.CouponUpdateView.as_view(), name='update_coupon'),
+    path('add_coupon/',  manage_coupon.AddCouponView.as_view(), name='add_coupon'),
+    path('delete_coupon/<int:pk>/', manage_coupon.CouponDeleteView.as_view(), name='delete_coupon'),
+]
+# Manage Site Settings
+urlpatterns += [
+    path('site-settings/', manage_sitesettings.SiteSettingsListView.as_view(), name='site_settings'),
+    path('site-settings/add/', manage_sitesettings.AddSiteSettingView.as_view(), name='add_site_setting'),
+    path('site-settings/<int:pk>/update/', manage_sitesettings.UpdateSiteSettingView.as_view(), name='update_site_setting'),
+    path('site-settings/<int:pk>/delete/', manage_sitesettings.SiteSettingDeleteView.as_view(), name='delete_site_setting'),
+]

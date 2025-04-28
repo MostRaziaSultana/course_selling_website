@@ -1,0 +1,51 @@
+{% extends 'authority_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4 shadow-sm">
+    <h6 class="title-custom mb-4">{{ title }}</h6>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="site-settings-details mb-4">
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">WhatsApp Logo</label>
+                    {{ form.whatsapp_logo|add_class:"form-control" }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Facebook Pixel</label>
+                    {{ form.facebook_pixel|add_class:"form-control" }}
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">SSL ID</label>
+                    {{ form.ssl_id|add_class:"form-control" }}
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">SSL Password</label>
+                    {{ form.ssl_password|add_class:"form-control" }}
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <label class="form-label">Is Sandbox?</label>
+                    {{ form.is_sandbox|add_class:"form-check-input" }}
+                </div>
+            </div>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+{% endblock body %}
