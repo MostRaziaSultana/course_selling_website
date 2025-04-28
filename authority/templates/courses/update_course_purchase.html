@@ -50,15 +50,20 @@
             </div>
         </div>
 
-        <div class="row mb-3">
-            <div class="col-12">
-                <label for="id_coupon_applied" class="form-label">Coupon Applied</label>
-                {{ form.coupon_applied|add_class:"form-control" }}
-                {% if form.coupon_applied.errors %}
-                    <div class="text-danger small">{{ form.coupon_applied.errors.0 }}</div>
-                {% endif %}
-            </div>
-        </div>
+<div class="row mb-3">
+    <div class="col-12">
+        <label for="id_coupon_applied" class="form-label">Coupon Applied</label>
+        {% if form.coupon_applied.value %}
+            {{ form.coupon_applied|add_class:"form-control" }}
+        {% else %}
+            <div class="form-control">N/A</div>
+        {% endif %}
+        {% if form.coupon_applied.errors %}
+            <div class="text-danger small">{{ form.coupon_applied.errors.0 }}</div>
+        {% endif %}
+    </div>
+</div>
+
 
         <div class="row mb-3">
             <div class="col-12">

@@ -78,6 +78,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'Home.context_processors.businessinfo',
                 'Home.context_processors.logo',
+                'Home.context_processors.homepage',
             ],
         },
     },

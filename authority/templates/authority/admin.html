@@ -7,62 +7,123 @@
     <div class="row g-4">
 
 
-<!-- Total Projects Block -->
+<!-- Total Courses Block -->
 <div class="col-sm-6 col-xl-3">
     <div class="bg-white text-dark rounded d-flex align-items-center justify-content-between p-4 box-shadow shadow-lg" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding-left: unset !important;">
         <div class="ms-3">
             <p class="mb-2 text-dark">Total Courses</p>
-            <h6 class="mb-0 text-dark"></h6>
+            <h6 class="mb-0 text-dark">{{ total_courses }}</h6>
         </div>
         <div class="icon-box">
-            <i class="fa-solid fa-project-diagram fa-2x text-white"></i>
+            <i class="fa-solid fa-book-open fa-2x text-white"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Total Messages Block -->
+<div class="col-sm-6 col-xl-3">
+    <div class="bg-white text-dark rounded d-flex align-items-center justify-content-between p-4 box-shadow shadow-lg" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding-left: unset !important;">
+        <div class="ms-3">
+            <p class="mb-2 text-dark">Total Messages</p>
+            <h6 class="mb-0 text-dark">{{ total_messages }}</h6>
+        </div>
+        <div class="icon-box">
+            <i class="fa-solid fa-envelope fa-2x text-white"></i>
         </div>
     </div>
 </div>
 
 
-        <!-- Total Messages Block -->
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-white text-dark rounded d-flex align-items-center justify-content-between p-4 box-shadow shadow-lg" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding-left: unset !important;">
-                <div class="ms-3">
-                    <p class="mb-2 text-dark">Total Messages</p>
-                    <h6 class="mb-0 text-dark"></h6>
-                </div>
-                <div class="icon-box">
-                    <i class="fa-solid fa-envelope fa-2x text-white"></i>
-                </div>
-            </div>
+
+<!-- Total Blog Block -->
+<div class="col-sm-6 col-xl-3">
+    <div class="bg-white text-dark rounded d-flex align-items-center justify-content-between p-4 box-shadow shadow-lg" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding-left: unset !important;">
+        <div class="ms-3">
+            <p class="mb-2 text-dark">Total Blogs</p>
+            <h6 class="mb-0 text-dark">{{ total_blogs }}</h6>
         </div>
+        <div class="icon-box">
+            <i class="fa-solid fa-newspaper fa-2x text-white" style="padding: 10px; border-radius: 10px;"></i>
+        </div>
+    </div>
+</div>
 
 
-        <!-- Total Blog Block -->
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-white text-dark rounded d-flex align-items-center justify-content-between p-4 box-shadow shadow-lg" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding-left: unset !important;">
-                <div class="ms-3">
-                    <p class="mb-2 text-dark">Total Blogs</p>
-                    <h6 class="mb-0 text-dark"></h6>
-                </div>
-                <div class="icon-box">
-                    <i class="fa-solid fa-newspaper fa-2x text-white"></i>
-                </div>
-            </div>
+<!-- Total Course Purchases Block -->
+<div class="col-sm-6 col-xl-3">
+    <div class="bg-white text-dark rounded d-flex align-items-center justify-content-between p-4 box-shadow shadow-lg" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding-left: unset !important;">
+        <div class="ms-3">
+            <p class="mb-2 text-dark">Total Purchases</p>
+            <h6 class="mb-0 text-dark">{{ total_course_purchases }}</h6>
         </div>
+        <div class="icon-box">
+            <i class="fa-solid fa-shopping-cart fa-2x text-white"></i>
+        </div>
+    </div>
+</div>
 
-        <!-- Total Service Block -->
-        <div class="col-sm-6 col-xl-3">
-            <div class="bg-white text-dark rounded d-flex align-items-center justify-content-between p-4 box-shadow shadow-lg" style="box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); padding-left: unset !important;">
-                <div class="ms-3">
-                    <p class="mb-2 text-dark">Total users</p>
-                    <h6 class="mb-0 text-dark"></h6>
-                </div>
-                <div class="icon-box">
-                    <i class="fa-solid fa-cogs fa-2x text-white"></i>
-                </div>
-            </div>
-        </div>
 
     </div>
 </div>
+
+<!-- Recent Purchases Start -->
+<div class="container-fluid px-4">
+    <div class="bg-light text-center rounded p-4 shadow-lg mb-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0" style="color: #555;">Last 10 Purchases</h6>
+            <a href="{% url 'authority:course_purchase_list' %}" class="order-now-btn">Show All</a>
+        </div>
+
+        <!-- Table Section -->
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0 shadow-sm">
+                <thead class="table-white">
+                    <tr class="text-grey">
+                        <th class="text-center">Sl</th>
+                        <th>User</th>
+                        <th>Course</th>
+                        <th>Amount Paid (Tk)</th>
+                        <th>Coupon Applied</th>
+                        <th>Transaction ID</th>
+                        <th>Purchase Date</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for purchase in latest_course_purchases %}
+                    <tr>
+                        <td class="text-center">{{ forloop.counter }}</td>
+                        <td>{{ purchase.user.username }}</td>
+                        <td>{{ purchase.course.title }}</td>
+                        <td>{{ purchase.amount_paid }}</td>
+                        <td>
+                            {% if purchase.coupon_applied %}
+                                {{ purchase.coupon_applied }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td>{{ purchase.tran_id }}</td>
+                        <td>{{ purchase.purchase_date|date:"Y-m-d H:i" }}</td>
+                        <td class="text-center">
+                            {% if purchase.is_ordered %}
+                                <span class="badge bg-success">Ordered</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Not Ordered</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <a class="order-now-btn btn btn-sm btn-primary" href="{% url 'authority:update_course_purchase' purchase.id %}">Update</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Recent Purchases End -->
 
 
 
