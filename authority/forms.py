@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 
 # models
 from django.contrib.auth.models import User
-from Home.models import Banner,Blog,BlogCategory,BusinessInfo,Logosettings,FAQ,Brand
+from Home.models import Banner,Blog,BlogCategory,BusinessInfo,Logosettings,FAQ,Brand,Achievement
 from ContactUs.models import UserMessage
 from Course.models import Coupon,SiteSettings,CourseCategory,CoursePurchase,Course
 
@@ -214,3 +214,9 @@ class CoursePurchaseForm(forms.ModelForm):
     class Meta:
         model = CoursePurchase
         fields = ['user', 'course', 'amount_paid', 'coupon_applied', 'is_ordered']
+
+
+class AchievementForm(forms.ModelForm):
+    class Meta:
+        model = Achievement
+        fields = ['name', 'value', 'icon_class']

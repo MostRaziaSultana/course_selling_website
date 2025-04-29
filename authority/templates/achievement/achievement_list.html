@@ -1,0 +1,51 @@
+{% extends 'authority_base.html' %}
+{% load static %}
+
+{% block title %}Achievement List{% endblock title %}
+
+{% block body %}
+<div class="bg-light rounded h-100 p-4 shadow-sm">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h6 class="title-custom">Achievements</h6>
+        <a class="order-now-btn" href="{% url 'authority:add_achievement' %}">
+            <i class="fa-solid fa-circle-plus me-2"></i>Add Achievement
+        </a>
+    </div>
+
+    {% if achievements %}
+    <div class="table-responsive">
+        <table class="table text-start align-middle table-bordered table-hover mb-0 table-custom">
+            <thead class="table-white">
+                <tr class="text-grey">
+                    <th scope="col">Name</th>
+                    <th scope="col">Value</th>
+                    <th scope="col">Icon Class</th>
+                    <th scope="col" class="text-center">Edit</th>
+                    <th scope="col" class="text-center">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for achievement in achievements %}
+                <tr>
+                    <td>{{ achievement.name }}</td>
+                    <td>{{ achievement.value }}</td>
+                    <td><i class="{{ achievement.icon_class }}"></i> {{ achievement.icon_class }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-sm btn-primary" href="{% url 'authority:update_achievement' achievement.id %}">Edit</a>
+                    </td>
+                    <td class="text-center">
+                        <form method="post" action="{% url 'authority:delete_achievement' achievement.id %}" onsubmit="return confirm('Are you sure?');">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="text-center text-muted">No achievements found.</div>
+    {% endif %}
+</div>
+{% endblock body %}

@@ -15,6 +15,7 @@ from authority.views import manage_contact
 from authority.views import manage_coupon
 from authority.views import manage_sitesettings
 from authority.views import manage_course
+from authority.views import manage_achievement
 
 
 
@@ -132,3 +133,11 @@ urlpatterns += [
     path('course-purchases/<int:pk>/update/', manage_course.UpdateCoursePurchaseView.as_view(), name='update_course_purchase'),
     path('course-purchases/<int:pk>/delete/', manage_course.CoursePurchaseDeleteView.as_view(), name='delete_course_purchase'),
 ]
+# Manage Achievements
+urlpatterns += [
+    path('achievements/', manage_achievement.AchievementListView.as_view(), name='achievement_list'),
+    path('achievements/add/', manage_achievement.AddAchievementView.as_view(), name='add_achievement'),
+    path('achievements/<int:pk>/update/', manage_achievement.UpdateAchievementView.as_view(), name='update_achievement'),
+    path('achievements/<int:pk>/delete/', manage_achievement.AchievementDeleteView.as_view(), name='delete_achievement'),
+]
+

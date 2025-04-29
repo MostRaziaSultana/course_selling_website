@@ -75,7 +75,7 @@ class CouponUpdateView(LoginRequiredMixin, AdminPassesTestMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Update Coupon"
-        context["updated"] = True  # Ensure this is set to True for updates
+        context["updated"] = True
         return context
 
 
