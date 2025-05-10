@@ -132,34 +132,32 @@
                         </div>
                         <div class="best-cpurse section-padding">
         <div class="container">
-            <div class="section-title">
-              <h2>Current Course</h2>
-              
-            </div>
-            <div class="row">
-               
-                <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
-                    <div class="course-slide">
-                        <div class="course-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFpE_CJvPxG2BqjyCT73AxhEq5wEUOGVViIg&s" alt="course_image">
-<!--                            <div class="course-date">-->
-<!--                                <span class="month">${{ course.price|default:"Free" }}</span>-->
-<!--                            </div>-->
-                        </div>
-                        <div class="course-content"><a class="c_btn" href=""> Web Development </a>
-                            <h3> <a href="">Python & Django</a></h3>
-                            <span><i class="fa fa-calendar"></i>3 Lessons</span>
+    <div class="section-title">
+        <h2>Your Purchased Courses</h2>
+    </div>
+    <div class="row">
+        {% for purchase in purchased_courses %}
+            <div class="col-lg-6 col-sm-6 col-xs-12 wow fadeInUp" data-wow-duration="1s" data-wow-delay="0.1s" data-wow-offset="0">
+                <div class="course-slide">
+                    <div class="course-img">
+                        <img src="{{ purchase.course.image.url }}" alt="{{ purchase.course.title }}">
+                    </div>
+                    <div class="course-content">
+                        <a class="c_btn" href="#">{{ purchase.course.category.name }}</a>
+                        <h3><a href="#">{{ purchase.course.title }}</a></h3>
+                       <span><i class="fa fa-calendar"></i>3 Lessons</span>
                             <span><i class="fa fa-clock-o"></i>3h 45m</span>
                             <span><i class="fa fa-star"></i>4.9</span>
                             <span><i class="fa fa-table"></i><strong>30 Seats Available</strong></span>
-
-                        </div>
-                    </div><!--END COURSE SLIDE -->
+                    </div>
                 </div>
-                
-               
-            </div><!--END ROW -->
-        </div><!--END CONTAINER -->
+            </div>
+        {% empty %}
+            <p class="text-center">You haven’t purchased any courses yet.</p>
+        {% endfor %}
+    </div>
+</div>
+<!--END CONTAINER -->
     </div>
     <!--END COURSE -->
                         <!--START COURSE -->
