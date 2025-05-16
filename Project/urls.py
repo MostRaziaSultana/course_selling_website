@@ -20,6 +20,8 @@ urlpatterns = [
     path('logout/', logout, name="logout"),
 
     path('userdashboard/', userdashboard, name="userdashboard"),
+    path('dashboard/course/<int:course_id>/', dashboard_course_details, name='dashboard_course_details'),
+
     path('contact/', contact, name="contact"),
 
     path('blogs/', blogs, name="blogs"),
